@@ -17,7 +17,7 @@ void FScreenshotter::CaptureScreenshots(FString File)
 	if (FPaths::IsRelative(File))
 		File = FPaths::ProjectDir() + "/" + File;
 
-	CurrentScreenshotFolder = FPaths::ProjectSavedDir() / TEXT("EditorScreenshots") / FPaths::GetBaseFilename(FPaths::GetPath(File));
+	CurrentScreenshotFolder = FPaths::ProjectSavedDir() / TEXT("EditorScreenshots") / FPaths::GetBaseFilename(File);
 	
 	if (!fmgr.FileExists(*File)) {
 		UE_LOG(LogTemp, Error, TEXT("File does not exist: %s"), *File);
