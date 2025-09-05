@@ -42,7 +42,13 @@ TSharedPtr<SWidget> FScreenshotPainter::GetPainting(FConfigFile* Input, FString 
 	for (FString& h : Highlights) {
 		TArray<FString> Path;
 		h.ParseIntoArray(Path, TEXT("."));
-		TSharedPtr<SWidget> Widget = FindWidgetByPath(Window->GetContent(), Path);
+		
+		int nth = 0;
+		if (Path.Last().IsNumeric()) {
+			nth = FCString::Atoi(*Path.Last());
+			Path.RemoveAt(Path.Num() - 1);
+		}
+		TSharedPtr<SWidget> Widget = FindWidgetByPath(Window->GetContent(), Path, nth);
 		if (!Widget.IsValid()) {
 			UE_LOG(LogTemp, Warning, TEXT("Widget not found: %s"), *h);
 			continue;
@@ -54,7 +60,7 @@ TSharedPtr<SWidget> FScreenshotPainter::GetPainting(FConfigFile* Input, FString 
 	return SNew(SScreenshotPainterWidget).HighlightWidgets(HighlightWidgets);
 }
 
-TSharedPtr<SWidget> FScreenshotPainter::FindWidgetByPath(TSharedPtr<SWidget> Root, const TArray<FString>& Path)
+TSharedPtr<SWidget> FScreenshotPainter::FindWidgetByPath(TSharedPtr<SWidget> Root, const TArray<FString>& Path, int Nth)
 {
 	FChildren* children = Root->GetChildren();
 	TSharedPtr<SWidget> child = nullptr;
@@ -64,8 +70,12 @@ TSharedPtr<SWidget> FScreenshotPainter::FindWidgetByPath(TSharedPtr<SWidget> Roo
 		for (int i = 0; i < children->Num(); i++) {
 			child = children->GetChildAt(i);
 			if (p.Equals(child->GetTypeAsString())) {
-				if (j == Path.Num() - 1)
-					return child;
+				if (j == Path.Num() - 1) {
+					Nth--;
+					if (Nth < 0)
+						return child;
+					continue;
+				}
 				children = child->GetChildren();
 				break;
 			}
