@@ -1,13 +1,15 @@
-﻿// Copyright Epic Games, Inc. All Rights Reserved.
+﻿// Copyright sirjofri. All rights reserved. See License file for more info.
 
-#include "EditorWindowScreenshot.h"
+#include "EditorScreenshot.h"
 
 #include "Screenshotter.h"
 #include "HAL/IConsoleManager.h"
 
-#define LOCTEXT_NAMESPACE "FEditorWindowScreenshotModule"
+DEFINE_LOG_CATEGORY(LogEditorScreenshot);
 
-void FEditorWindowScreenshotModule::StartupModule()
+#define LOCTEXT_NAMESPACE "FEditorScreenshotModule"
+
+void FEditorScreenshotModule::StartupModule()
 {
 	Screenshotter = MakeShared<FScreenshotter>();
 	
@@ -21,7 +23,7 @@ void FEditorWindowScreenshotModule::StartupModule()
 		}));
 }
 
-void FEditorWindowScreenshotModule::ShutdownModule()
+void FEditorScreenshotModule::ShutdownModule()
 {
 	IConsoleManager::Get().UnregisterConsoleObject(TEXT("EditorScreenshot.Capture"));
 	Screenshotter.Reset();
@@ -29,4 +31,4 @@ void FEditorWindowScreenshotModule::ShutdownModule()
 
 #undef LOCTEXT_NAMESPACE
 	
-IMPLEMENT_MODULE(FEditorWindowScreenshotModule, EditorWindowScreenshot)
+IMPLEMENT_MODULE(FEditorScreenshotModule, EditorScreenshot)

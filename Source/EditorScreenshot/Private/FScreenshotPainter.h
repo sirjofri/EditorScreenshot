@@ -1,3 +1,5 @@
+// Copyright sirjofri. All rights reserved. See License file for more info.
+
 #pragma once
 
 #include "CoreMinimal.h"

@@ -1,10 +1,10 @@
-﻿// Copyright Epic Games, Inc. All Rights Reserved.
+﻿// Copyright sirjofri. All rights reserved. See License file for more info.
 
 using UnrealBuildTool;
 
-public class EditorWindowScreenshot : ModuleRules
+public class EditorScreenshot : ModuleRules
 {
-	public EditorWindowScreenshot(ReadOnlyTargetRules Target) : base(Target)
+	public EditorScreenshot(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		

@@ -15,7 +15,7 @@
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "EditorWindowScreenshot",
+			"Name": "EditorScreenshot",
 			"Type": "EditorAndProgram",
 			"LoadingPhase": "Default"
 		}
