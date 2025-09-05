@@ -5,6 +5,7 @@
 #include "Framework/Application/SlateApplication.h"
 #include "Framework/Docking/TabManager.h"
 #include "HAL/FileManager.h"
+#include "Misc/ConfigCacheIni.h"
 #include "Misc/FileHelper.h"
 #include "Tests/AutomationEditorCommon.h"
 #include "Tests/AutomationEditorPromotionCommon.h"
@@ -24,13 +25,16 @@ void FScreenshotter::CaptureScreenshots(FString File)
 		return;
 	}
 
-	Lines.Empty();
-	if (!FFileHelper::LoadFileToStringArray(Lines, *File)) {
-		UE_LOG(LogTemp, Error, TEXT("Cannot read file: %s"), *File);
+	Input.Empty();
+	Input.Read(File);
+
+	Sections.Empty();
+	if (Input.GetKeys(Sections) <= 0) {
+		UE_LOG(LogTemp, Log, TEXT("Input file is empty"));
 		return;
 	}
 
-	NextLine = 0;
+	NextSection = 0;
 	Stage = PreCapture;
 }
 
@@ -77,41 +81,39 @@ void FScreenshotter::TakeCurrentScreenshot()
 
 void FScreenshotter::CaptureNumber()
 {
-	if (!Lines.IsValidIndex(NextLine)) {
+	if (!Sections.IsValidIndex(NextSection)) {
 		Stage = None;
 		return;
 	}
 
-	FString Line = Lines[NextLine];
+	FString Section = Sections[NextSection];
 
-	auto QueueNextLine = [&]()
+	auto QueueNextSection = [&]()
 	{
-		NextLine++;
+		NextSection++;
 		Stage = PreCapture;
 	};
 
-	UE_LOG(LogTemp, Log, TEXT("Screenshot %s"), *Line);
+	UE_LOG(LogTemp, Log, TEXT("Preparing %s"), *Section);
 
-	if (Line.StartsWith("#")) {
-		QueueNextLine();
+	FString SizeString;
+	if (!Input.GetString(*Section, TEXT("Size"), SizeString)) {
+		UE_LOG(LogTemp, Error, TEXT("Missing Size in section %s"), *Section);
 		return;
 	}
-
-	UE_LOG(LogTemp, Log, TEXT("Preparing %s"), *Line);
-
 	TArray<FString> Parts;
-	Line.ParseIntoArrayWS(Parts);
+	SizeString.ParseIntoArray(Parts, TEXT("x"));
 
-	if (Parts.Num() < 3) {
-		UE_LOG(LogTemp, Error, TEXT("Bad line: %s"), *Line);
-		QueueNextLine();
+	if (Parts.Num() != 2) {
+		UE_LOG(LogTemp, Error, TEXT("Bad Size: %s in Section %s"), *SizeString, *Section);
+		QueueNextSection();
 		return;
 	}
 
-	FVector2D Size(FCString::Atoi(*Parts[1]), FCString::Atoi(*Parts[2]));
+	FVector2D Size(FCString::Atoi(*Parts[0]), FCString::Atoi(*Parts[1]));
 
 	TArray<FString> TabList;
-	Parts[0].ParseIntoArray(TabList, TEXT("/"));
+	Section.ParseIntoArray(TabList, TEXT("/"));
 
 	TSharedRef<FGlobalTabmanager> tmgr = FGlobalTabmanager::Get();
 	TSharedPtr<SDockTab> relevanttab;
@@ -137,6 +139,6 @@ void FScreenshotter::CaptureNumber()
 	CurrentScreenshotData.Widget = Window;
 	CurrentScreenshotData.Window = Window;
 
-	NextLine++;
+	NextSection++;
 	Stage = Capture;
 }

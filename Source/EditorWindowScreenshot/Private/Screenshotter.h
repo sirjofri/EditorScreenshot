@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "TickableEditorObject.h"
+#include "Misc/ConfigCacheIni.h"
 
 class SWidget;
 class SWindow;
@@ -29,8 +30,9 @@ private:
 
 	TickStage Stage = TickStage::None;
 
-	TArray<FString> Lines;
-	int NextLine = 0;
+	FConfigFile Input;
+	TArray<FString> Sections;
+	int NextSection = 0;
 
 	struct FCurrentScreenshotData
 	{
