@@ -52,6 +52,11 @@ void FScreenshotter::Tick(float DeltaTime)
 	case PreCapture:
 		CaptureNumber();
 		break;
+	case Warmup:
+		WarmupFrames--;
+		if (WarmupFrames <= 0)
+			Stage = Capture;
+		break;
 	case Capture:
 		TakeCurrentScreenshot();
 		break;
@@ -60,7 +65,7 @@ void FScreenshotter::Tick(float DeltaTime)
 
 bool FScreenshotter::IsTickable() const
 {
-	return Stage == PreCapture || Stage == Capture;
+	return Stage != None;
 }
 
 void FScreenshotter::TakeScreenshot(FString Target, FString Folder, TSharedPtr<SWidget> InWidget)
@@ -158,5 +163,9 @@ void FScreenshotter::CaptureNumber()
 	CurrentScreenshotData.Window = Window;
 
 	NextSection++;
-	Stage = Capture;
+
+	WarmupFrames = 0;
+	Input.GetInt(*Section, TEXT("Warmup"), WarmupFrames);
+	
+	Stage = WarmupFrames > 0 ? Warmup : Capture;
 }

@@ -1,3 +1,5 @@
+// Copyright sirjofri. All rights reserved. See License file for more info.
+
 #include "EditorScreenshot.h"
 #include "Screenshotter.h"
 #include "HAL/FileManager.h"

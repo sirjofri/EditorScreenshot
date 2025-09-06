@@ -28,7 +28,7 @@ private:
 
 	enum TickStage
 	{
-		None, PreCapture, Capture
+		None, PreCapture, Warmup, Capture
 	};
 
 	TickStage Stage = TickStage::None;
@@ -36,6 +36,8 @@ private:
 	FConfigFile Input;
 	TArray<FString> Sections;
 	int NextSection = 0;
+
+	int WarmupFrames = 0;
 
 	struct FCurrentScreenshotData
 	{

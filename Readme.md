@@ -25,6 +25,7 @@ Each section contains the following keys:
 
 - `Size`: The size of the window to capture, in pixels, using the format `WxH`.
 - `Name`: Optional name of the screenshot. If not specified, the name of the window (tab name) is used.
+- `Warmup`: Optional number of frames to wait before capturing the screenshot. This is useful for widgets that take more than one frame for the final presentation.
 - `Highlight`: A path to a child widget to highlight (See next section). This key can appear multiple times.
 
 ### Widget highlighting
