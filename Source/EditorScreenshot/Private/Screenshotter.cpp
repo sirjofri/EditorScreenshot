@@ -127,6 +127,12 @@ void FScreenshotter::CaptureNumber()
 		TempTabManager = tmgr->GetTabManagerForMajorTab(tab);
 		relevanttab = tab;
 	}
+	FString Name = TabList.Last();
+	{
+		FString tn;
+		if (Input.GetString(*Section, TEXT("Name"), tn))
+			Name = tn;
+	}
 
 	TSharedRef<SWindow> Window = SNew(SWindow)
 		.ClientSize(Size);
@@ -142,7 +148,7 @@ void FScreenshotter::CaptureNumber()
 		Window->BeginFullWindowOverlayTransition();
 	}
 
-	CurrentScreenshotData.Target = TabList.Last();
+	CurrentScreenshotData.Target = Name;
 	CurrentScreenshotData.Widget = Window;
 	CurrentScreenshotData.Window = Window;
 
