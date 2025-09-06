@@ -17,6 +17,8 @@ public:
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
 
+	TSharedPtr<FScreenshotter> GetScreenshotter() const { return Screenshotter; }
+
 private:
 	TSharedPtr<FScreenshotter> Screenshotter;
 };

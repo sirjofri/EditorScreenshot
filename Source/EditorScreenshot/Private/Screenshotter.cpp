@@ -41,6 +41,11 @@ void FScreenshotter::CaptureScreenshots(FString File)
 	Stage = PreCapture;
 }
 
+bool FScreenshotter::CaptureInProgress()
+{
+	return Stage != None;
+}
+
 void FScreenshotter::Tick(float DeltaTime)
 {
 	switch (Stage) {

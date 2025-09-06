@@ -19,7 +19,8 @@ void FEditorScreenshotModule::StartupModule()
 			if (Args.IsEmpty())
 				return;
 
-			Screenshotter->CaptureScreenshots(Args[0]);
+			FString File = FString::Join(Args, TEXT(" "));
+			Screenshotter->CaptureScreenshots(File);
 		}));
 }
 

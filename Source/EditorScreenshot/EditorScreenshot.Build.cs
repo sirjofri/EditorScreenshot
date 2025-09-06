@@ -36,6 +36,7 @@ public class EditorScreenshot : ModuleRules
 				"Slate",
 				"SlateCore",
 				"UnrealEd",
+				"Projects",
 			}
 			);
 		

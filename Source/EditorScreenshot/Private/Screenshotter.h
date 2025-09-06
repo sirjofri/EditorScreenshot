@@ -13,6 +13,7 @@ class FScreenshotter : public TSharedFromThis<FScreenshotter>, public FTickableE
 {
 public:
 	void CaptureScreenshots(FString File);
+	bool CaptureInProgress();
 
 	virtual TStatId GetStatId() const override { return TStatId(); }
 	virtual void Tick(float DeltaTime) override;
