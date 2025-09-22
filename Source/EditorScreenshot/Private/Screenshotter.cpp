@@ -3,7 +3,7 @@
 #include "Screenshotter.h"
 
 #include "Editor.h"
-#include "FScreenshotPainter.h"
+#include "ScreenshotPainter.h"
 #include "ImageUtils.h"
 #include "Framework/Application/SlateApplication.h"
 #include "Framework/Docking/TabManager.h"
@@ -153,6 +153,7 @@ void FScreenshotter::CaptureNumber()
 	Size.Y -= borders.Top + borders.Bottom + (Title.IsSet() ? Title.Get() : 0);
 	Window->Resize(Size);
 	Window->SetContent(relevanttab->GetContent());
+	Window->SetTitle(relevanttab->GetTabLabel());
 	if (FScreenshotPainter::HasPainting(&Input, Section)) {
 		Window->SetFullWindowOverlayContent(FScreenshotPainter::GetPainting(&Input, Section, Window));
 		Window->BeginFullWindowOverlayTransition();
