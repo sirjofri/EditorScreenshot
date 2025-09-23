@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "TickableEditorObject.h"
+#include "Layout/Margin.h"
 #include "Misc/ConfigCacheIni.h"
 
 class SWidget;
@@ -21,7 +22,7 @@ public:
 	virtual ETickableTickType GetTickableTickType() const override { return ETickableTickType::Conditional; };
 
 private:
-	void TakeScreenshot(FString Target, FString Folder, TSharedPtr<SWidget> InWidget);
+	void TakeScreenshot(FString Target, FString Folder, TSharedPtr<SWidget> InWidget, FIntRect CropRect);
 
 	void TakeCurrentScreenshot();
 	void CaptureNumber();
@@ -44,6 +45,8 @@ private:
 		FString Target;
 		TSharedPtr<SWidget> Widget;
 		TSharedPtr<SWindow> Window;
+		TSharedPtr<SWidget> CropWidget;
+		FMargin CropMargin;
 	};
 
 	FCurrentScreenshotData CurrentScreenshotData;

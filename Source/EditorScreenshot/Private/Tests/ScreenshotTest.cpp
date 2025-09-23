@@ -17,7 +17,7 @@ bool FWaitForCaptureDone::Update()
 {
 	bool IsRunning = GetCurrentRunTime() > 0.1;
 	
-	if (GetCurrentRunTime() > 5.) {
+	if (GetCurrentRunTime() > 30.) {
 		Test->AddError(TEXT("ScreenshotTest timed out"));
 		return true;
 	}
@@ -38,6 +38,9 @@ bool FCaptureScreenshotVerifyTests::Update()
 	TArray<FString> Files = {
 		TEXT("DebugTools_DebugPanel.png"),
 		TEXT("LocalizationTargets.png"),
+		TEXT("DebugTools_Cropped_Uniform.png"),
+		TEXT("DebugTools_Cropped_Two.png"),
+		TEXT("DebugTools_Cropped_Four.png"),
 	};
 
 	for (FString& f : Files) {

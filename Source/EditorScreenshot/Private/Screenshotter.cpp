@@ -5,6 +5,7 @@
 #include "Editor.h"
 #include "ScreenshotPainter.h"
 #include "ImageUtils.h"
+#include "ScreenshotCropper.h"
 #include "Framework/Application/SlateApplication.h"
 #include "Framework/Docking/TabManager.h"
 #include "HAL/FileManager.h"
@@ -68,7 +69,7 @@ bool FScreenshotter::IsTickable() const
 	return Stage != None;
 }
 
-void FScreenshotter::TakeScreenshot(FString Target, FString Folder, TSharedPtr<SWidget> InWidget)
+void FScreenshotter::TakeScreenshot(FString Target, FString Folder, TSharedPtr<SWidget> InWidget, FIntRect CropRect)
 {
 	if (!FSlateApplication::IsInitialized()) {
 		UE_LOG(LogTemp, Error, TEXT("Slate is not initialized"));
@@ -77,7 +78,7 @@ void FScreenshotter::TakeScreenshot(FString Target, FString Folder, TSharedPtr<S
 	UE_LOG(LogTemp, Log, TEXT("Taking screenshot %s"), *Target);
 	TArray<FColor> OutImageData;
 	FIntVector OutImageSize;
-	if (FSlateApplication::Get().TakeScreenshot(InWidget.ToSharedRef(), OutImageData, OutImageSize)) {
+	if (FSlateApplication::Get().TakeScreenshot(InWidget.ToSharedRef(), CropRect, OutImageData, OutImageSize)) {
 		FString FileName;
 		const FString BaseFileName = Folder / Target + TEXT(".png");
 		FImageView ImageView(OutImageData.GetData(), OutImageSize.X, OutImageSize.Y);
@@ -87,7 +88,16 @@ void FScreenshotter::TakeScreenshot(FString Target, FString Folder, TSharedPtr<S
 
 void FScreenshotter::TakeCurrentScreenshot()
 {
-	TakeScreenshot(CurrentScreenshotData.Target, CurrentScreenshotFolder, CurrentScreenshotData.Widget);
+	FIntRect CropRect;
+	if (CurrentScreenshotData.CropWidget.IsValid()) {
+		FSlateRect Rect = CurrentScreenshotData.CropWidget->GetPaintSpaceGeometry().GetLayoutBoundingRect();
+		CropRect = FIntRect(
+			Rect.Left - CurrentScreenshotData.CropMargin.Left,
+			Rect.Top - CurrentScreenshotData.CropMargin.Top,
+			Rect.Right + CurrentScreenshotData.CropMargin.Right,
+			Rect.Bottom + CurrentScreenshotData.CropMargin.Bottom);
+	}
+	TakeScreenshot(CurrentScreenshotData.Target, CurrentScreenshotFolder, CurrentScreenshotData.Widget, CropRect);
 	CurrentScreenshotData.Window->RequestDestroyWindow();
 	Stage = PreCapture;
 }
@@ -125,23 +135,32 @@ void FScreenshotter::CaptureNumber()
 
 	FVector2D Size(FCString::Atoi(*Parts[0]), FCString::Atoi(*Parts[1]));
 
+	FString TabPath;
+	if (!Input.GetString(*Section, TEXT("Tab"), TabPath)) {
+		UE_LOG(LogTemp, Error, TEXT("Missing Tab in section %s"), *Section);
+		QueueNextSection();
+		return;
+	}
+
 	TArray<FString> TabList;
-	Section.ParseIntoArray(TabList, TEXT("/"));
+	TabPath.ParseIntoArray(TabList, TEXT("/"));
 
 	TSharedRef<FGlobalTabmanager> tmgr = FGlobalTabmanager::Get();
 	TSharedPtr<SDockTab> relevanttab;
 
 	TSharedPtr<FTabManager> TempTabManager = tmgr;
 	for (FString ts : TabList) {
-		TSharedPtr<SDockTab> tab = TempTabManager->TryInvokeTab(FName(ts));
+		FName tn = FName(ts);
+		TSharedPtr<SDockTab> tab = TempTabManager->FindExistingLiveTab(tn);
+		if (!tab.IsValid())
+			tab = TempTabManager->TryInvokeTab(tn);
+		if (!tab.IsValid()) {
+			UE_LOG(LogTemp, Error, TEXT("Tab not found: %s"), *ts);
+			QueueNextSection();
+			return;
+		}
 		TempTabManager = tmgr->GetTabManagerForMajorTab(tab);
 		relevanttab = tab;
-	}
-	FString Name = TabList.Last();
-	{
-		FString tn;
-		if (Input.GetString(*Section, TEXT("Name"), tn))
-			Name = tn;
 	}
 
 	TSharedRef<SWindow> Window = SNew(SWindow)
@@ -154,14 +173,18 @@ void FScreenshotter::CaptureNumber()
 	Window->Resize(Size);
 	Window->SetContent(relevanttab->GetContent());
 	Window->SetTitle(relevanttab->GetTabLabel());
+
 	if (FScreenshotPainter::HasPainting(&Input, Section)) {
 		Window->SetFullWindowOverlayContent(FScreenshotPainter::GetPainting(&Input, Section, Window));
 		Window->BeginFullWindowOverlayTransition();
 	}
 
-	CurrentScreenshotData.Target = Name;
+	CurrentScreenshotData.Target = Section;
 	CurrentScreenshotData.Widget = Window;
 	CurrentScreenshotData.Window = Window;
+	CurrentScreenshotData.CropWidget = nullptr;
+
+	FScreenshotCropper::GetCropData(&Input, Section, Window, CurrentScreenshotData.CropWidget, CurrentScreenshotData.CropMargin);
 
 	NextSection++;
 

@@ -30,8 +30,4 @@ class FScreenshotPainter
 public:
 	static bool HasPainting(FConfigFile* Input, FString Section);
 	static TSharedPtr<SWidget> GetPainting(FConfigFile* Input, FString Section, TSharedPtr<SWindow> Window);
-
-private:
-	static TSharedPtr<SWidget> FindWidgetByPath(TSharedPtr<SWidget> Root, const TArray<FString>& Path);
-	static TSharedPtr<SWidget> FindWidgetDepth(TSharedPtr<SWidget> Root, const FString& Type);
 };
