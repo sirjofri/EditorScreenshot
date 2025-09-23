@@ -99,6 +99,14 @@ void FScreenshotter::TakeCurrentScreenshot()
 	}
 	TakeScreenshot(CurrentScreenshotData.Target, CurrentScreenshotFolder, CurrentScreenshotData.Widget, CropRect);
 	CurrentScreenshotData.Window->RequestDestroyWindow();
+
+	for (int i = TabsToClose.Num() - 1; i >= 0; i--) {
+		TSharedPtr<SDockTab> tab = TabsToClose[i];
+		if (tab.IsValid())
+			tab->RequestCloseTab();
+	}
+	TabsToClose.Empty();
+	
 	Stage = PreCapture;
 }
 
@@ -148,12 +156,15 @@ void FScreenshotter::CaptureNumber()
 	TSharedRef<FGlobalTabmanager> tmgr = FGlobalTabmanager::Get();
 	TSharedPtr<SDockTab> relevanttab;
 
+	TabsToClose.Empty();
 	TSharedPtr<FTabManager> TempTabManager = tmgr;
 	for (FString ts : TabList) {
 		FName tn = FName(ts);
 		TSharedPtr<SDockTab> tab = TempTabManager->FindExistingLiveTab(tn);
-		if (!tab.IsValid())
+		if (!tab.IsValid()) {
 			tab = TempTabManager->TryInvokeTab(tn);
+			TabsToClose.Add(tab);
+		}
 		if (!tab.IsValid()) {
 			UE_LOG(LogTemp, Error, TEXT("Tab not found: %s"), *ts);
 			QueueNextSection();

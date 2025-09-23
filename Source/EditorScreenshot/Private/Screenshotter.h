@@ -9,6 +9,7 @@
 
 class SWidget;
 class SWindow;
+class SDockTab;
 
 class FScreenshotter : public TSharedFromThis<FScreenshotter>, public FTickableEditorObject
 {
@@ -39,6 +40,8 @@ private:
 	int NextSection = 0;
 
 	int WarmupFrames = 0;
+
+	TArray<TSharedPtr<SDockTab>> TabsToClose;
 
 	struct FCurrentScreenshotData
 	{
