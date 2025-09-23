@@ -15,6 +15,7 @@ class FScreenshotter : public TSharedFromThis<FScreenshotter>, public FTickableE
 {
 public:
 	void CaptureScreenshots(FString File);
+	void CaptureFileDialog();
 	bool CaptureInProgress();
 
 	virtual TStatId GetStatId() const override { return TStatId(); }

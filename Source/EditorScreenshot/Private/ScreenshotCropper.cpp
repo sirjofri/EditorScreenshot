@@ -2,6 +2,7 @@
 
 #include "ScreenshotCropper.h"
 
+#include "EditorScreenshot.h"
 #include "ScreenshotWidgetUtils.h"
 #include "Misc/ConfigCacheIni.h"
 #include "Widgets/SWindow.h"
@@ -21,7 +22,7 @@ void FScreenshotCropper::GetCropData(FConfigFile* Input, FString Section, TShare
 
 	TSharedPtr<SWidget> TargetWidget = FScreenshotWidgetUtils::FindWidgetByPath(Window->GetContent(), Path);
 	if (!TargetWidget.IsValid()) {
-		UE_LOG(LogTemp, Error, TEXT("Widget %s not found for cropping"), *CropTarget);
+		UE_LOG(LogEditorScreenshot, Error, TEXT("Widget %s not found for cropping"), *CropTarget);
 		return;
 	}
 
@@ -45,7 +46,7 @@ void FScreenshotCropper::GetCropData(FConfigFile* Input, FString Section, TShare
 		Margin = FMargin(FCString::Atoi(*MarginParts[0]), FCString::Atoi(*MarginParts[1]), FCString::Atoi(*MarginParts[2]), FCString::Atoi(*MarginParts[3]));
 		break;
 	default:
-		UE_LOG(LogTemp, Error, TEXT("Bad CropMargin: %s"), *MarginString);
+		UE_LOG(LogEditorScreenshot, Error, TEXT("Bad CropMargin: %s"), *MarginString);
 		Margin = FMargin(0);
 	}
 

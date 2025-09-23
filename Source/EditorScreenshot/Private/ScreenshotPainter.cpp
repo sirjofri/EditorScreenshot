@@ -2,6 +2,7 @@
 
 #include "ScreenshotPainter.h"
 
+#include "EditorScreenshot.h"
 #include "ScreenshotWidgetUtils.h"
 #include "Widgets/SWindow.h"
 
@@ -48,7 +49,7 @@ TSharedPtr<SWidget> FScreenshotPainter::GetPainting(FConfigFile* Input, FString 
 		
 		TSharedPtr<SWidget> Widget = FScreenshotWidgetUtils::FindWidgetByPath(Window->GetContent(), Path);
 		if (!Widget.IsValid()) {
-			UE_LOG(LogTemp, Warning, TEXT("Widget not found: %s"), *h);
+			UE_LOG(LogEditorScreenshot, Warning, TEXT("Widget not found: %s"), *h);
 			continue;
 		}
 		HighlightWidgets.Add(Widget);

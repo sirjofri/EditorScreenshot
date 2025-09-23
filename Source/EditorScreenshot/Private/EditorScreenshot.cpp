@@ -13,7 +13,8 @@ void FEditorScreenshotModule::StartupModule()
 {
 	Screenshotter = MakeShared<FScreenshotter>();
 	
-	IConsoleManager::Get().RegisterConsoleCommand(TEXT("EditorScreenshot.Capture"), TEXT("Capture screenshots from a file"),
+	IConsoleManager::Get().RegisterConsoleCommand(TEXT("EditorScreenshot.CaptureFile"),
+		TEXT("Capture screenshots from a file specified as an argument"),
 		FConsoleCommandWithArgsDelegate::CreateLambda([&](const TArray<FString>& Args)
 		{
 			if (Args.IsEmpty())
@@ -21,6 +22,13 @@ void FEditorScreenshotModule::StartupModule()
 
 			FString File = FString::Join(Args, TEXT(" "));
 			Screenshotter->CaptureScreenshots(File);
+		}));
+
+	IConsoleManager::Get().RegisterConsoleCommand(TEXT("EditorScreenshot.Capture"),
+		TEXT("Open File picker to capture file"),
+		FConsoleCommandDelegate::CreateLambda([&]()
+		{
+			Screenshotter->CaptureFileDialog();
 		}));
 }
 
