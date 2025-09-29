@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "1.0",
-	"FriendlyName": "EditorWindowScreenshot",
+	"FriendlyName": "ScriptedEditorScreenshot",
 	"Description": "Automatically capture screenshots of specified editor windows",
 	"Category": "Other",
 	"CreatedBy": "sirjofri",
@@ -15,7 +15,7 @@
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "EditorScreenshot",
+			"Name": "ScriptedEditorScreenshot",
 			"Type": "EditorAndProgram",
 			"LoadingPhase": "Default"
 		}

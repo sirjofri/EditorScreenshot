@@ -5,11 +5,11 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(LogEditorScreenshot, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(LogScriptedEditorScreenshot, Log, All);
 
 class FScreenshotter;
 
-class FEditorScreenshotModule : public IModuleInterface
+class FScriptedEditorScreenshotModule : public IModuleInterface
 {
 public:
 

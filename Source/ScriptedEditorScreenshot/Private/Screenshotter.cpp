@@ -4,7 +4,7 @@
 
 #include "DesktopPlatformModule.h"
 #include "Editor.h"
-#include "EditorScreenshot.h"
+#include "ScriptedEditorScreenshot.h"
 #include "IDesktopPlatform.h"
 #include "ScreenshotPainter.h"
 #include "ImageUtils.h"
@@ -30,7 +30,7 @@ void FScreenshotter::CaptureScreenshots(FString File)
 	CurrentScreenshotFolder = FPaths::ProjectSavedDir() / TEXT("EditorScreenshots") / FPaths::GetBaseFilename(File);
 	
 	if (!fmgr.FileExists(*File)) {
-		UE_LOG(LogEditorScreenshot, Error, TEXT("File does not exist: %s"), *File);
+		UE_LOG(LogScriptedEditorScreenshot, Error, TEXT("File does not exist: %s"), *File);
 		return;
 	}
 
@@ -39,7 +39,7 @@ void FScreenshotter::CaptureScreenshots(FString File)
 
 	Sections.Empty();
 	if (Input.GetKeys(Sections) <= 0) {
-		UE_LOG(LogEditorScreenshot, Log, TEXT("Input file is empty"));
+		UE_LOG(LogScriptedEditorScreenshot, Log, TEXT("Input file is empty"));
 		return;
 	}
 
@@ -66,7 +66,7 @@ void FScreenshotter::CaptureFileDialog()
 		FPaths::ProjectDir(), TEXT(""), TEXT("INI Files|*.ini|All Files|*"), EFileDialogFlags::None, Files);
 
 	if (!success || Files.IsEmpty()) {
-		UE_LOG(LogEditorScreenshot, Log, TEXT("Cancelled"));
+		UE_LOG(LogScriptedEditorScreenshot, Log, TEXT("Cancelled"));
 		return;
 	}
 
@@ -103,10 +103,10 @@ bool FScreenshotter::IsTickable() const
 void FScreenshotter::TakeScreenshot(FString Target, FString Folder, TSharedPtr<SWidget> InWidget, FIntRect CropRect)
 {
 	if (!FSlateApplication::IsInitialized()) {
-		UE_LOG(LogEditorScreenshot, Error, TEXT("Slate is not initialized"));
+		UE_LOG(LogScriptedEditorScreenshot, Error, TEXT("Slate is not initialized"));
 		return;
 	}
-	UE_LOG(LogEditorScreenshot, Log, TEXT("Taking screenshot %s"), *Target);
+	UE_LOG(LogScriptedEditorScreenshot, Log, TEXT("Taking screenshot %s"), *Target);
 	TArray<FColor> OutImageData;
 	FIntVector OutImageSize;
 	if (FSlateApplication::Get().TakeScreenshot(InWidget.ToSharedRef(), CropRect, OutImageData, OutImageSize)) {
@@ -156,18 +156,18 @@ void FScreenshotter::CaptureNumber()
 		Stage = PreCapture;
 	};
 
-	UE_LOG(LogEditorScreenshot, Log, TEXT("Preparing %s"), *Section);
+	UE_LOG(LogScriptedEditorScreenshot, Log, TEXT("Preparing %s"), *Section);
 
 	FString SizeString;
 	if (!Input.GetString(*Section, TEXT("Size"), SizeString)) {
-		UE_LOG(LogEditorScreenshot, Error, TEXT("Missing Size in section %s"), *Section);
+		UE_LOG(LogScriptedEditorScreenshot, Error, TEXT("Missing Size in section %s"), *Section);
 		return;
 	}
 	TArray<FString> Parts;
 	SizeString.ParseIntoArray(Parts, TEXT("x"));
 
 	if (Parts.Num() != 2) {
-		UE_LOG(LogEditorScreenshot, Error, TEXT("Bad Size: %s in Section %s"), *SizeString, *Section);
+		UE_LOG(LogScriptedEditorScreenshot, Error, TEXT("Bad Size: %s in Section %s"), *SizeString, *Section);
 		QueueNextSection();
 		return;
 	}
@@ -176,7 +176,7 @@ void FScreenshotter::CaptureNumber()
 
 	FString TabPath;
 	if (!Input.GetString(*Section, TEXT("Tab"), TabPath)) {
-		UE_LOG(LogEditorScreenshot, Error, TEXT("Missing Tab in section %s"), *Section);
+		UE_LOG(LogScriptedEditorScreenshot, Error, TEXT("Missing Tab in section %s"), *Section);
 		QueueNextSection();
 		return;
 	}
@@ -197,7 +197,7 @@ void FScreenshotter::CaptureNumber()
 			TabsToClose.Add(tab);
 		}
 		if (!tab.IsValid()) {
-			UE_LOG(LogEditorScreenshot, Error, TEXT("Tab not found: %s"), *ts);
+			UE_LOG(LogScriptedEditorScreenshot, Error, TEXT("Tab not found: %s"), *ts);
 			QueueNextSection();
 			return;
 		}

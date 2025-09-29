@@ -2,7 +2,7 @@
 
 #include "ScreenshotWidgetUtils.h"
 
-#include "EditorScreenshot.h"
+#include "ScriptedEditorScreenshot.h"
 #include "Layout/ChildrenBase.h"
 #include "Widgets/SWidget.h"
 
@@ -38,14 +38,14 @@ TSharedPtr<SWidget> FScreenshotWidgetUtils::FindWidgetByPath(TSharedPtr<SWidget>
 					j++;
 					continue;
 				}
-				UE_LOG(LogEditorScreenshot, Warning, TEXT("Widget not found: %s"), *p);
+				UE_LOG(LogScriptedEditorScreenshot, Warning, TEXT("Widget not found: %s"), *p);
 				return nullptr;
 			}
 		}
 		if (p.StartsWith(TEXT("[")) && p.EndsWith(TEXT("]"))) {
 			child = FindWidgetDepth(child, p.Mid(1, p.Len() - 2));
 			if (!child.IsValid()) {
-				UE_LOG(LogEditorScreenshot, Warning, TEXT("Widget not found with depth search: %s"), *p);
+				UE_LOG(LogScriptedEditorScreenshot, Warning, TEXT("Widget not found with depth search: %s"), *p);
 				return nullptr;
 			}
 			if (j == Path.Num() - 1)
@@ -55,7 +55,7 @@ TSharedPtr<SWidget> FScreenshotWidgetUtils::FindWidgetByPath(TSharedPtr<SWidget>
 		}
 		child = findnth(children, p, 0);
 		if (!child.IsValid()) {
-			UE_LOG(LogEditorScreenshot, Warning, TEXT("Widget not Found: %s"), *p);
+			UE_LOG(LogScriptedEditorScreenshot, Warning, TEXT("Widget not Found: %s"), *p);
 			return nullptr;
 		}
 		if (j == Path.Num() - 1)

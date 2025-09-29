@@ -1,4 +1,4 @@
-# Editor Screenshot
+# Scripted Editor Screenshot
 
 This Unreal plugin allows you to take screenshots of editor windows based on a description file.
 Its use case is primarily for tool developers who want to automate creating screenshots of their tools.
@@ -7,10 +7,10 @@ The goal is to reproduce solid screenshots for documentation purposes that can d
 
 ## Usage
 
-To capture a screenshot, run the `EditorScreenshot.CaptureFile <File>` command.
+To capture a screenshot, run the `ScriptedEditorScreenshot.CaptureFile <File>` command.
 This command expects a path to a description file, which is an INI file. The format of the file is described in the following section.
 
-The command `EditorScreenshot.Capture` will open a file dialog to select the description file.
+The command `ScriptedEditorScreenshot.Capture` will open a file dialog to select the description file.
 
 The path to the file is relative to the project directory, or an absolute path.
 

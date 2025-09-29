@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="128"
+   height="128"
+   viewBox="0 0 128 128"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="Icon128.svg"
+   inkscape:export-filename="Icon128.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="6.3046875"
+     inkscape:cx="63.206939"
+     inkscape:cy="57.655514"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1"
+     inkscape:export-bgcolor="#ffffff00">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="8"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 64 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="84.223048 : 84.936803 : 1"
+       inkscape:persp3d-origin="64 : 42.666667 : 1"
+       id="perspective1" />
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer">
+    <g
+       id="Frame"
+       style="fill:none;stroke:#ffffff;stroke-opacity:1;stroke-width:2;stroke-dasharray:none;stroke-linecap:butt;stroke-linejoin:round">
+      <rect
+         id="border"
+         width="112"
+         height="96"
+         x="8"
+         y="16"
+         ry="0"
+         style="stroke-width:2;stroke-dasharray:none;fill:#3d3d3d;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+      <path
+         d="M 8,32 H 120"
+         id="Titlebar_Line"
+         style="stroke-width:2;stroke-dasharray:none;stroke:#ffffff;stroke-opacity:1" />
+      <g
+         id="icons"
+         style="stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-width:0.5;stroke:#ffffff;stroke-opacity:1;fill:#2a2a2a;fill-opacity:1">
+        <rect
+           id="title_icon"
+           width="9"
+           height="9"
+           x="11.5"
+           y="19.5"
+           style="stroke:#ffffff;stroke-opacity:1;fill:#2a2a2a;fill-opacity:1;stroke-width:0.5;stroke-dasharray:none" />
+        <rect
+           id="close_icon"
+           width="9"
+           height="9"
+           x="107.5"
+           y="19.5"
+           style="stroke:#ffffff;stroke-opacity:1;fill:#2a2a2a;fill-opacity:1;stroke-width:0.5;stroke-dasharray:none" />
+        <rect
+           id="max_icon"
+           width="9"
+           height="9"
+           x="95.5"
+           y="19.5"
+           style="stroke:#ffffff;stroke-opacity:1;fill:#2a2a2a;fill-opacity:1;stroke-width:0.5;stroke-dasharray:none" />
+        <rect
+           id="min_button"
+           width="9"
+           height="9"
+           x="83.5"
+           y="19.5"
+           style="stroke:#ffffff;stroke-opacity:1;fill:#2a2a2a;fill-opacity:1;stroke-width:0.5;stroke-dasharray:none" />
+      </g>
+      <g
+         id="icons_drawing"
+         style="stroke-linecap:round;stroke-width:1;stroke-dasharray:none;stroke:#ffffff;stroke-opacity:1">
+        <g
+           id="minimize"
+           style="stroke:#ffffff;stroke-opacity:1">
+          <path
+             d="m 85.5,26.5 h 5"
+             id="min"
+             style="stroke:#ffffff;stroke-opacity:1" />
+        </g>
+        <g
+           id="maximize"
+           style="stroke-width:1;stroke-dasharray:none;stroke:#ffffff;stroke-opacity:1">
+          <rect
+             id="max"
+             width="5"
+             height="5"
+             x="97.5"
+             y="21.5"
+             style="stroke-width:1;stroke-dasharray:none;stroke:#ffffff;stroke-opacity:1" />
+        </g>
+        <g
+           id="close"
+           style="stroke-linecap:round;stroke-width:1;stroke-dasharray:none;stroke:#ffffff;stroke-opacity:1">
+          <path
+             d="m 109.5,21.5 5,5"
+             id="cross_down"
+             style="stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+             sodipodi:nodetypes="cc" />
+          <path
+             d="m 114.5,21.5 -5,5"
+             id="cross_up"
+             style="stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+             sodipodi:nodetypes="cc" />
+        </g>
+        <g
+           id="win_icon"
+           style="stroke:#ffffff;stroke-opacity:1">
+          <path
+             d="m 14,25 4,-2"
+             id="icon_line_mid"
+             sodipodi:nodetypes="cc"
+             style="stroke:#ffffff;stroke-opacity:1" />
+          <path
+             d="m 13.5,21.5 h 5"
+             id="icon_line_top"
+             sodipodi:nodetypes="cc"
+             style="stroke:#ffffff;stroke-opacity:1" />
+          <path
+             d="m 13.5,26.5 h 5"
+             id="icon_line_bot"
+             sodipodi:nodetypes="cc"
+             style="stroke:#ffffff;stroke-opacity:1" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="camera"
+       style="stroke:#ffffff;stroke-opacity:1;fill:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:2;stroke-dasharray:none">
+      <circle
+         id="cam_roll_back"
+         cx="96"
+         cy="56"
+         r="16"
+         style="fill:#7a7a7a;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1" />
+      <circle
+         id="cam_roll_front"
+         cx="60"
+         cy="56"
+         r="16"
+         style="fill:#7a7a7a;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+      <circle
+         id="cam_roll_front_center"
+         cx="60"
+         cy="56"
+         r="3"
+         style="fill:#3e3e3e;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1" />
+      <circle
+         id="cam_roll_back_center"
+         cx="96"
+         cy="56"
+         r="3"
+         style="fill:#3e3e3e;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         d="M 16,40 40,56 V 88 L 16,104 Z"
+         id="visor"
+         style="fill:#7b7b7b;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+      <g
+         id="Text"
+         style="font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"
+         transform="translate(5,-33)">
+        <text
+           xml:space="preserve"
+           x="40"
+           y="120"
+           id="T_Editor"
+           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"><tspan
+             sodipodi:role="line"
+             x="40"
+             y="120"
+             id="tspan14">Editor</tspan></text>
+        <text
+           xml:space="preserve"
+           x="40"
+           y="128"
+           id="T_Screenshot"
+           style="font-style:italic;font-variant:normal;font-stretch:normal;font-size:10px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"><tspan
+             sodipodi:role="line"
+             id="tspan15"
+             x="40"
+             y="128">Screenshot</tspan></text>
+      </g>
+      <path
+         d="m 104,74 c 0,0 0,12 0,18 0,6 -2,8 -8,8 -6,0 -48,0 -48,0 -4,0 -7,-4 -7,-8"
+         id="cam_curve"
+         sodipodi:nodetypes="czzzz"
+         style="stroke:#ffffff;stroke-opacity:1" />
+      <g
+         id="cam_lines"
+         style="stroke-width:1;stroke-dasharray:none;stroke:#ffffff;stroke-opacity:1">
+        <path
+           d="m 100,76 m -6,1 6,3 m -6,1 6,3 m -6,1 6,3"
+           id="path16"
+           sodipodi:nodetypes="cc"
+           style="stroke:#ffffff;stroke-opacity:1" />
+      </g>
+      <g
+         id="g1"
+         inkscape:label="roll_lines"
+         style="fill:none;stroke:#ffffff;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:5, 15;stroke-dashoffset:8.55">
+        <path
+           d="M 77,39 60,56"
+           id="l_1" />
+        <path
+           d="M 43,39 60,56"
+           id="l_2" />
+        <path
+           d="M 43,73 60,56"
+           id="l_3" />
+        <path
+           d="M 77,73 60,56"
+           id="l_4" />
+        <path
+           d="M 113,39 96,56"
+           id="r_1"
+           sodipodi:nodetypes="cc" />
+        <path
+           d="M 79,39 96,56"
+           id="r_2"
+           sodipodi:nodetypes="cc" />
+        <path
+           d="M 79,73 96,56"
+           id="r_3"
+           sodipodi:nodetypes="cc" />
+        <path
+           d="M 113,73 96,56"
+           id="r_4"
+           sodipodi:nodetypes="cc" />
+      </g>
+    </g>
+  </g>
+</svg>

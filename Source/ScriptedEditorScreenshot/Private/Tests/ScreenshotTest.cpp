@@ -1,6 +1,6 @@
 // Copyright sirjofri. All rights reserved. See License file for more info.
 
-#include "EditorScreenshot.h"
+#include "ScriptedEditorScreenshot.h"
 #include "Screenshotter.h"
 #include "HAL/FileManager.h"
 #include "Interfaces/IPluginManager.h"
@@ -8,7 +8,7 @@
 #include "Modules/ModuleManager.h"
 #include "Tests/AutomationCommon.h"
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FScreenshotTest, "EditorScreenshot.ScreenshotTest",
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FScreenshotTest, "ScriptedEditorScreenshot.ScreenshotTest",
                                  EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter | EAutomationTestFlags::NonNullRHI)
 
 DEFINE_LATENT_AUTOMATION_COMMAND_TWO_PARAMETER(FWaitForCaptureDone, FScreenshotTest*, Test, TSharedPtr<FScreenshotter>, Screenshotter);
@@ -70,7 +70,7 @@ bool FScreenshotTest::RunTest(const FString& Parameters)
 	
 	AddInfo(TEXT("Description file: ") + File);
 
-	TSharedPtr<FScreenshotter> Screenshotter = FModuleManager::LoadModuleChecked<FEditorScreenshotModule>("EditorScreenshot").GetScreenshotter();
+	TSharedPtr<FScreenshotter> Screenshotter = FModuleManager::LoadModuleChecked<FScriptedEditorScreenshotModule>("ScriptedEditorScreenshot").GetScreenshotter();
 
 	ADD_LATENT_AUTOMATION_COMMAND(FExecStringLatentCommand(TEXT("EditorScreenshot.Capture ") + File));
 	ADD_LATENT_AUTOMATION_COMMAND(FWaitForCaptureDone(this, Screenshotter));

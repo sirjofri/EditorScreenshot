@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class EditorScreenshot : ModuleRules
+public class ScriptedEditorScreenshot : ModuleRules
 {
-	public EditorScreenshot(ReadOnlyTargetRules Target) : base(Target)
+	public ScriptedEditorScreenshot(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		

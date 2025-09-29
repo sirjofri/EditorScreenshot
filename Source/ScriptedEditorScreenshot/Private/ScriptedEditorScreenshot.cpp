@@ -1,15 +1,15 @@
 ﻿// Copyright sirjofri. All rights reserved. See License file for more info.
 
-#include "EditorScreenshot.h"
+#include "ScriptedEditorScreenshot.h"
 
 #include "Screenshotter.h"
 #include "HAL/IConsoleManager.h"
 
-DEFINE_LOG_CATEGORY(LogEditorScreenshot);
+DEFINE_LOG_CATEGORY(LogScriptedEditorScreenshot);
 
-#define LOCTEXT_NAMESPACE "FEditorScreenshotModule"
+#define LOCTEXT_NAMESPACE "ScriptedEditorScreenshot"
 
-void FEditorScreenshotModule::StartupModule()
+void FScriptedEditorScreenshotModule::StartupModule()
 {
 	Screenshotter = MakeShared<FScreenshotter>();
 	
@@ -24,7 +24,7 @@ void FEditorScreenshotModule::StartupModule()
 			Screenshotter->CaptureScreenshots(File);
 		}));
 
-	IConsoleManager::Get().RegisterConsoleCommand(TEXT("EditorScreenshot.Capture"),
+	IConsoleManager::Get().RegisterConsoleCommand(TEXT("ScriptedEditorScreenshot.Capture"),
 		TEXT("Open File picker to capture file"),
 		FConsoleCommandDelegate::CreateLambda([&]()
 		{
@@ -32,12 +32,12 @@ void FEditorScreenshotModule::StartupModule()
 		}));
 }
 
-void FEditorScreenshotModule::ShutdownModule()
+void FScriptedEditorScreenshotModule::ShutdownModule()
 {
-	IConsoleManager::Get().UnregisterConsoleObject(TEXT("EditorScreenshot.Capture"));
+	IConsoleManager::Get().UnregisterConsoleObject(TEXT("ScriptedEditorScreenshot.Capture"));
 	Screenshotter.Reset();
 }
 
 #undef LOCTEXT_NAMESPACE
 	
-IMPLEMENT_MODULE(FEditorScreenshotModule, EditorScreenshot)
+IMPLEMENT_MODULE(FScriptedEditorScreenshotModule, ScriptedEditorScreenshot)
