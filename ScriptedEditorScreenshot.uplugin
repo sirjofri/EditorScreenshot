@@ -1,23 +1,24 @@
 ﻿{
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "0.1",
-	"FriendlyName": "ScriptedEditorScreenshot",
+	"VersionName": "0.1.0",
+	"FriendlyName": "Scripted Editor Screenshot",
 	"Description": "Automatically capture screenshots of specified editor windows",
-	"Category": "Other",
+	"Category": "Editor",
 	"CreatedBy": "sirjofri",
 	"CreatedByURL": "https://sirjofri.de",
-	"DocsURL": "",
+	"DocsURL": "https://github.com/sirjofri/ScriptedEditorScreenshot/blob/main/Readme.md",
 	"MarketplaceURL": "",
-	"CanContainContent": true,
-	"IsBetaVersion": true,
+	"CanContainContent": false,
+	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
 	"Installed": false,
 	"Modules": [
 		{
 			"Name": "ScriptedEditorScreenshot",
 			"Type": "EditorAndProgram",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [ "Win64" ]
 		}
 	]
 }
