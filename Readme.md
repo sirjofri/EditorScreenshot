@@ -17,6 +17,14 @@ The path to the file is relative to the project directory, or an absolute path.
 The resulting screenshots are saved to the `(Project)/Saved/EditorScreenshots/` directory.
 A subfolder is created based on the name of the description file.
 
+For automation, you can use the `ScriptedEditorScreenshot.CaptureThenQuit` command using a command line call like this:
+
+```shell
+\Path\To\UnrealEditor.exe "Path\To\Project.uproject" -ExecCmds="ScriptedEditorScreenshot.CaptureThenQuit Description.ini"
+```
+
+This will make the screenshots, then exit the editor.
+
 ## Description file format
 
 The description file is an INI file.
